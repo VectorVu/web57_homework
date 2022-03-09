@@ -5,12 +5,7 @@ const obj1 = { x: 20, y: 30 };
 
 function cloneDeep(obj) {
     let jsonObj = JSON.stringify(obj);
-    // chuyển obj đầu vào sang dạng JSON để giữ được tất cả các key, value của obj1 ở dạng dữ liệu string (nguyên thủy)
     let cloneObj = JSON.parse(jsonObj);
-    /*parse obj đã chuyển sang JSON lại dạng object,
-    khi này thì thực chất tất cả các key và value của obj1 ban đầu sẽ được clone qua biến mới như 1 dạng dữ liệu nguyên thủy
-    và sẽ được lưu vào 1 ô nhớ khác với ô nhớ của obj1, nên việc sửa đổi dữ liệu của obj2 không ảnh hưởng đến obj1;
-    */ 
     return cloneObj;
 }
 const obj2 = cloneDeep(obj1)
