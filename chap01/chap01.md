@@ -34,7 +34,7 @@ const apples = [...macbooks];
 sau khi đoạn code trên được thực thi,
 biến `apples` là một mảng chứa các phần tử đã được clone từ mảng `macbooks`.  
  
-`macbooks[0]` và `macbooks[2]` là 2 chuỗi string (dữ liệu nguyên thủy), còn `macbooks[1]` là một object, cho nên khi ta dùng toán tử spread để clone các phần tử từ macbooks sang apples thì `apples[0]` và `apples[2]` copy giá trị được chứa trong ô nhớ của `macbooks[0]` và `macbooks[2]` và lưu vào ô nhớ của chính nó, còn `apples[1]` copy địa chỉ ô nhớ của `macbooks[1]`.
+`macbooks[0]` và `macbooks[2]` là 2 chuỗi string (dữ liệu nguyên thủy), còn `macbooks[1]` là một object, cho nên khi ta dùng toán tử spread để clone các phần tử từ `macbooks` sang `apples` thì `apples[0]` và `apples[2]` copy giá trị được chứa trong ô nhớ của `macbooks[0]` và `macbooks[2]` và lưu vào ô nhớ của chính nó, còn `apples[1]` copy địa chỉ ô nhớ của `macbooks[1]`.
 ```
 apples[0] = 'air';
 ```
@@ -116,15 +116,15 @@ alert( counter.up() ); // 1
 alert( counter.up() ); // 2
 alert( counter.down() ); // 1
 ```
-Giải thích: Ta thấy,Counter( là một constructor function. 
-Sau khi dòng lệnhlet counter = new Counter( được thực thi thì:
+Giải thích: Ta thấy, Counter() là một constructor function. 
+Sau khi dòng lệnhlet counter = new Counter() được thực thi thì:
 
 1. Một object mới được tạo ra, object counter;
 2. This sẽ được bind vào counter, vậy nên mọi references đến this đều trỏ vào counter;
 3. proto được thêm vào. Do đó counter.proto sẽ trỏ vào Counter.prototype `console.log(counter.__proto__ === Counter.prototype); // true`;
 4. Sau cùng, object counter mới được tạo đó sẽ được return thành biến counter của ta.
 
-Vì đó, biến counter có thể sử dụng `this.up` và `this.down` của `Counter()` và kết quả được in ra như ta đã thấy. [^1]
+Vì đó, biến counter có thể sử dụng `this.up` và `this.down` của `Counter()` và kết quả được in ra như ta đã thấy.
 
 ## Ex6
 
@@ -141,9 +141,9 @@ Thứ tự message in ra là `hello`, `hi`, và cuối cùng là `world`.
 Giải thích: 
 1. khi dòng lệnh `console.log("hello")` được thực thi, thì nó được đẩy vào call stack và tiến hành in `hello` ra console, sau đó được lấy ra khỏi call stack để đẩy hàm tiếp theo vào;
 2. khi dòng `setTimeout(() => console.log("world"), 0)` được thực thi, thì hàm callback được thêm vào vùng web Api của trình duyệt và web Api bắt đầu đếm thời gian được set của `setTimeout()`, ở đây là 0;
-3. cùng lúc đó, trong khi `setTimeout()` đang được tính thời gian trong vùng web Api thì ở callstack, dòng `console.log("hi")` được thêm vào và tiến hành in `hi` ra console;
-4. sau khi hết thời gian set ban đầu, hàm callback của setTimeout chưa được đưa vào callstack mà phải xuống hàng đợi queue, đợi Event Loop hoạt động. 
-5. sau khi `console.log("hi")` được thực thi xong và lấy ra khỏi callstack thì lúc này callstack đã trống và Event Loop tiến hành đưa hàm callback từ queue lên callstack và thực hiện `console.log("world")` in `world` ra console. 
+3. cùng lúc đó, trong khi `setTimeout()` đang được tính thời gian trong vùng web Api thì ở call stack, dòng `console.log("hi")` được thêm vào và tiến hành in `hi` ra console;
+4. sau khi hết thời gian set ban đầu, hàm callback của setTimeout chưa được đưa vào call stack mà phải xuống hàng đợi queue, đợi Event Loop hoạt động. 
+5. sau khi `console.log("hi")` được thực thi xong và lấy ra khỏi callstack thì lúc này call stack đã trống và Event Loop tiến hành đưa hàm callback từ queue lên call stack và thực hiện `console.log("world")` in `world` ra console. 
 
 
 
