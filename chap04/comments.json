@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1648038497370,
+        "content": "This is first comment",
+        "author": "THV",
+        "postId": "1648038364476"
+    },
+    {
+        "id": 1648038858239,
+        "content": "The second comment",
+        "author": "THV",
+        "postId": "1648038787685"
+    },
+    {
+        "id": 1648038929380,
+        "content": "Test 2",
+        "author": "THV",
+        "postId": "1648038787685"
+    },
+    {
+        "id": 1648038937522,
+        "content": "Test 3",
+        "author": "THV",
+        "postId": "1648038787685"
+    }
+]
