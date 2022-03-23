@@ -1,10 +1,10 @@
-function random(){
+function randomCourse(){
     const courses = [
         { "course": "c4e" },
         { "course": "ci" },
         { "course": "web57" }
     ]
-    let num = Math.floor(Math.random()*courses.length);
-    return courses[num];
+    const index = Math.floor(Math.random()*courses.length);
+    return courses[index];
 } 
-module.exports = random;
+module.exports = randomCourse;

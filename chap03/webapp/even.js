@@ -1,8 +1,9 @@
-function even(startNum, endNum){
+function getEvenInRange(startNum, endNum) {
     let evenArray = [];
-    for(let i = startNum; i<= endNum; i++){
-        if(i%2 === 0) evenArray.push(i);
+    if (startNum % 2 !== 0) startNum++;
+    for (let i = startNum; i <= endNum; i += 2) {
+        evenArray.push(i);
     }
     return evenArray;
 }
-module.exports = even;
+module.exports = getEvenInRange;

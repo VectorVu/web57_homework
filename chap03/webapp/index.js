@@ -1,8 +1,8 @@
 const express = require("express");
 
-const random = require("./random");
+const randomCourse = require("./random");
 
-const even = require("./even");
+const getEvenInRange = require("./even");
 
 const loginCheck = require("./loginChecking");
 // Ex1 xây dựng web app với express
@@ -21,13 +21,14 @@ app.get("/course", (req, res) => {
 })
 // GET /course/random
 app.get("/course/random", (req, res) => {
-    res.send(random());
+    res.send(randomCourse());
 })
 // GET /even
 app.get("/even", (req, res) => {
-    const start = parseInt(req.query['from']);
-    const end = parseInt(req.query['to']);
-    res.send({ "numbers": even(start, end) })
+    const { from, to } = req.query;
+    const begin = from ? parseInt(from) : 0;
+    const end = to ? parseInt(to) : 10;
+    res.send({ "numbers": getEvenInRange(begin, end) })
 })
 // GET login
 app.get("/style.css", (req, res) => {
@@ -38,8 +39,7 @@ app.get("/login", (req, res) => {
     res.sendFile(__dirname + "/public/login.html");
 })
 // POST /auth/login
-app.post("/auth/login", (req,res)=>{
-    console.log(req.body);
+app.post("/auth/login", (req, res) => {
     res.send(loginCheck(req.body));
 })
 // port 9000
