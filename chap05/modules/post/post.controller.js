@@ -69,16 +69,17 @@ const updatePost = async (req, res) => {
             throw new Error('Authorization is wrong');
         }
         const post = await PostModel.findById(postId);
-        const isAuthor = userId === post.author;
+        if(!post){
+            throw new Error('Not found post');
+        }
+        const isAuthor = userId === post.author.toString();
         if(!isAuthor){
             throw new Error('Not the author');
         }
         const { content } = req.body;
         const updatePost = await PostModel.findByIdAndUpdate(postId, { content }, { new: true });
-        if(updatePost) res.send({ success: 1, data: updatePost });
-        else {
-            throw new Error('Not found post');
-        }
+        res.send({ success: 1, data: updatePost });
+        
     } catch (error) {
         res.status(400).send({success:0, message: error.message})
     }
