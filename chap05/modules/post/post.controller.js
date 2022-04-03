@@ -19,8 +19,8 @@ const createPost = async (req, res) => {
             throw new Error('Not found token');
         }
         const jwtToken = token.split(' ')[1];
-        const data = jwt.verify(jwtToken, process.env.SECRET_KEY);
-        const {userId} = data;
+        const data = jwt.verify(jwtToken, process.env.SECRET_KEY).data;
+        const userId = data.userId;
         if(!userId){
             throw new Error('Authorization is wrong');
         }
