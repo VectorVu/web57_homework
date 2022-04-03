@@ -6,7 +6,9 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
     content: String,
     author: {
-        type: mongoose.Types.ObjectId
+        // type: mongoose.Types.ObjectId
+        type:String,
+        required:true
     }
 },{
     timestamps:true
