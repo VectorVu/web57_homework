@@ -58,10 +58,10 @@ const checkRole = (role) => {
         next();
     }
 }
-const checkQuery = (req, res, next)=>{
-    const {byPast} = req.query;
+const checkQuery = (req, res, next) => {
+    const { byPast } = req.query;
     console.log(byPast);
-    if(!(+byPast===1)){
+    if (!(+byPast === 1)) {
         throw new HttpError(400, 'Invalid params');
     }
     next();

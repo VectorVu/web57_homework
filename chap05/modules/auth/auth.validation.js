@@ -11,6 +11,8 @@ const registerSchema = Joi.object({
         .min(8)
         .required(),
     repeatPassword: Joi.ref('password'),
+    role: Joi.string()
+        .required()
 })
 const loginSchema = Joi.object({
     username: Joi.string()
@@ -24,7 +26,7 @@ const loginSchema = Joi.object({
         .required(),
 })
 
-module.exports ={
+module.exports = {
     registerSchema,
     loginSchema
 }
