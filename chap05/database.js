@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('express-async-errors');
 const express = require("express");
 
 const mongoose = require("mongoose");
@@ -19,6 +20,10 @@ app.use('/api/comments', commentRouter);
 app.use("/api/auth", authRouter);
 app.use('*', (req, res)=>{
     res.send({message: '404 not found'});
+})
+
+app.use(function (err, req, res, next) {
+    res.status(err.status||500).send({success:0, message: err.message})
 })
 app.listen(process.env.PORT||9002, err => {
     if (err) return console.log("can not start");

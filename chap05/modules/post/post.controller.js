@@ -1,101 +1,51 @@
 const PostModel = require("./post.model");
-const jwt = require("jsonwebtoken");
-const UserModel = require("../auth/user");
+const HttpError = require("../../common/httpError");
 
 const getPosts = async (req, res) => {
-    try {
-        const Posts = await PostModel.find();
-        res.send({ success: 1, data: Posts });
-    } catch (error) {
-        res.send({ success: 0, data: null });
+    const Posts = await PostModel.find();
+    if (!Posts) {
+        throw new HttpError("Something broke!");
     }
-
+    res.send({ success: 1, data: Posts });
 }
+
 const createPost = async (req, res) => {
-    try {
-        const token = req.headers.authorization;
-        
-        if(!token){
-            throw new Error('Not found token');
-        }
-        const jwtToken = token.split(' ')[1];
-        const data = jwt.verify(jwtToken, process.env.SECRET_KEY).data;
-        const userId = data.userId;
-        if(!userId){
-            throw new Error('Authorization is wrong');
-        }
-        const existedUser = await UserModel.findById(userId);
-        if(!existedUser){
-            throw new Error('Authorization is wrong');
-        }
-        
-        const { content } = req.body;
-        const newPost = await PostModel.create({ content, author: existedUser._id});
-
-        res.send({ success: 1, data: newPost });
-    } catch (error) {
-        res.status(400).send({success:0, message: error.message})
+    const { title, content } = req.body;
+    const newPost = await PostModel.create({ title, content, author: req.user._id });
+    if (!newPost) {
+        throw new HttpError("Something broke!");
     }
+    res.send({ success: 1, data: newPost });
 }
+
 const getAPost = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const Post = await PostModel.findById(postId);
-        if(Post) res.send({ success: 1, data: Post });
-        else res.send({ success: 0, data: postId+" is not exist" });    
-    } catch (error) {
-        res.send({ success: 0, data: null });
+    const { postId } = req.params;
+    const Post = await PostModel.findById(postId);
+    if (!Post) {
+        throw new HttpError(400, postId + " is not exist");
     }
+    res.send({ success: 1, data: Post });
 }
+
 const updatePost = async (req, res) => {
-    try {
-        const { postId } = req.params;
-
-        const token = req.headers.authorization;
-        
-        if(!token){
-            throw new Error('Not found token');
-        }
-        const jwtToken = token.split(' ')[1];
-        const data = jwt.verify(jwtToken, process.env.SECRET_KEY).data;
-        const userId = data.userId;
-        console.log(userId);
-
-        if(!userId){
-            throw new Error('Authorization is wrong');
-        }
-        const existedUser = await UserModel.findById(userId);
-        if(!existedUser){
-            throw new Error('Authorization is wrong');
-        }
-        const post = await PostModel.findById(postId);
-        if(!post){
-            throw new Error('Not found post');
-        }
-        const isAuthor = userId === post.author.toString();
-        if(!isAuthor){
-            throw new Error('Not the author');
-        }
-        const { content } = req.body;
-        const updatePost = await PostModel.findByIdAndUpdate(postId, { content }, { new: true });
-        res.send({ success: 1, data: updatePost });
-        
-    } catch (error) {
-        res.status(400).send({success:0, message: error.message})
+    const { postId } = req.params;
+    const { content } = req.body;
+    const updatePost = await PostModel.findByIdAndUpdate(postId, { content }, { new: true });
+    if (!updatePost) {
+        throw new HttpError(400, postId + " is not exist");
     }
+    res.send({ success: 1, data: updatePost });
 }
 
 const deletePost = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const postDelete =  await PostModel.findByIdAndDelete(postId);
-        if(postDelete) res.send({ success: 1, data: postId + " has been deleted" });
-        else res.send({ success: 0, data: postId + " is not exist" })
-       
-    } catch (error) {
-        res.send({ success: 0, data: "can not deleted this post: " + error });
+    const { postId } = req.params;
+    const postDelete = await PostModel.findByIdAndDelete(postId);
+    if (!postDelete) {
+        throw new HttpError(400, postId + " is not exist");
     }
-}    
+    res.send({ success: 1, data: postId + " has been deleted" });
+}
+
 module.exports = {
     createPost,
     getPosts,
