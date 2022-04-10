@@ -16,6 +16,9 @@ const uploadRouter = require("./modules/upload/upload.router");
 const app = express();
 
 app.use(express.json());
+app.get("/", (req, res)=>{
+    res.send('<h1>Đây là demo zozForum</h1><br><p>Test các api khác bằng Postman qua đường dẫn trang web/api/... Register -> login -> lấy token -> tạo post -> tạo comment ||upload ảnh,.... </p>')
+})
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
 app.use("/api/auth", authRouter);
@@ -27,7 +30,6 @@ app.use('*', (req, res)=>{
 })
 
 app.use(function (err, req, res, next) {
-    console.log(err);
     res.status(err.status||500).send({success:0, message: err.message})
 })
 app.listen(process.env.PORT||9002, err => {
