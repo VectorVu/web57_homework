@@ -10,8 +10,8 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const { title, content } = req.body;
-    const newPost = await PostModel.create({ title, content, author: req.user._id });
+    const { title, content, imageUrl } = req.body;
+    const newPost = await PostModel.create({ title, content, imageUrl, author: req.user._id });
     if (!newPost) {
         throw new HttpError("Something broke!");
     }

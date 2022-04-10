@@ -10,7 +10,7 @@ const middlewares = require("../../common/middlewares");
 const { createPostSchema, updataPostSchema } = require("./post.validation");
 
 // router tập hợp các API có điểm chung => post
-router.get("/", middlewares.checkQuery,postController.getPosts);
+router.get("/", postController.getPosts);
 router.get("/:postId", postController.getAPost);
 router.post("/",
     middlewares.needAuthenticated,

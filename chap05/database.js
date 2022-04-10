@@ -17,7 +17,7 @@ const app = express();
 
 app.use(express.json());
 app.get("/", (req, res)=>{
-    res.send('<h1>Đây là demo zozForum</h1><br><p>Test các api khác bằng Postman qua đường dẫn trang web/api/... Register -> login -> lấy token -> tạo post -> tạo comment ||upload ảnh,.... </p>')
+    res.send('<h1>Đây là demo ZoZForum</h1><br><p>Test các api khác bằng Postman qua đường dẫn trang web/api/... Register -> login -> lấy token -> tạo post -> tạo comment ||upload ảnh,.... </p>')
 })
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
