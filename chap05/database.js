@@ -12,17 +12,22 @@ mongoose.connect(process.env.MONGODB_URL, err => {
 const postRouter = require("./modules/post/post.router");
 const commentRouter = require("./modules/comment/comment.router");
 const authRouter = require("./modules/auth/auth.router");
+const uploadRouter = require("./modules/upload/upload.router");
 const app = express();
 
 app.use(express.json());
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/upload", uploadRouter);
+
 app.use('*', (req, res)=>{
+
     res.send({message: '404 not found'});
 })
 
 app.use(function (err, req, res, next) {
+    console.log(err);
     res.status(err.status||500).send({success:0, message: err.message})
 })
 app.listen(process.env.PORT||9002, err => {
