@@ -6,9 +6,9 @@ const getPosts = async (req, res) => {
     const { keyword } = req.query;
     let filter = {};
     if (keyword) {
-        slugify.extend({ 'a': 'à' })
-        const keywordSlug = slugify(keyword);
-        filter ={slug:keywordSlug};
+       
+        const keywordSlug = keyword.replace("a", "à");
+        filter={slug:keywordSlug};
         console.log(keywordSlug);
     }
     const Posts = await PostModel.find(filter);
