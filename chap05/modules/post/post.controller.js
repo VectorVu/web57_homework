@@ -10,7 +10,7 @@ const getPosts = async (req, res) => {
         const keywordSlug = slugify(keyword);
         console.log(keywordSlug);
 
-        filter = { slug: keyword };
+        filter = { slug: keywordSlug };
     }
     const Posts = await PostModel.find(filter);
     if (!Posts) {
