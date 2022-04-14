@@ -6,14 +6,12 @@ const getPosts = async (req, res) => {
     const { keyword } = req.query;
     let filter = {};
     if (keyword) {
-        // slugify.extend({ 'a': 'à' })
-        // const keywordSlug = slugify(keyword);
-        // console.log(keywordSlug);
-        keyword.replace("a","à");
-        filter ={slug:keyword};
-        console.log(keyword);
+        slugify.extend({ 'a': 'à' })
+        const keywordSlug = slugify(keyword);
+        filter ={slug:keywordSlug};
+        console.log(keywordSlug);
     }
-    const Posts = await PostModel.find({slug:keyword});
+    const Posts = await PostModel.find(filter);
     if (!Posts) {
         throw new HttpError("Something broke!");
     }
