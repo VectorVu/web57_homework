@@ -3,20 +3,11 @@ const HttpError = require("../../common/httpError");
 const slugify = require('slugify');
 
 const getPosts = async (req, res) => {
-    const { keyword } = req.query;
-    let filter = {};
-    if (keyword) {
-       
-        const keywordSlug = keyword.replace("a", "à");
-        filter={title:keywordSlug};
-        console.log(keywordSlug);
-    }
-    console.log(filter);
-    const Posts = await PostModel.find(filter);
+    const Posts = await PostModel.find();
     if (!Posts) {
         throw new HttpError("Something broke!");
     }
-    res.send({ success: 1, data: Posts});
+    res.send({ success: 1, data: Posts });
 }
 
 const createPost = async (req, res) => {
