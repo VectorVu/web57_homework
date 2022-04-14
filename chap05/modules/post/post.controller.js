@@ -13,7 +13,7 @@ const getPosts = async (req, res) => {
         keyword.replace("a","à");
         filter ={slug:keyword};
     }
-    const Posts = await PostModel.find({slug:{keyword}});
+    const Posts = await PostModel.find({slug:keyword});
     if (!Posts) {
         throw new HttpError("Something broke!");
     }
