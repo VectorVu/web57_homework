@@ -13,10 +13,11 @@ const getPosts = async (req, res) => {
         filter = { slug: keywordSlug };
     }
     const Posts = await PostModel.find(filter);
+    Posts.keyword=keyword;
     if (!Posts) {
         throw new HttpError("Something broke!");
     }
-    res.send({ success: 1, data: Posts });
+    res.send({ success: 1, data: Posts});
 }
 
 const createPost = async (req, res) => {
