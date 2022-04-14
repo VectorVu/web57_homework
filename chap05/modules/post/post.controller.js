@@ -11,7 +11,7 @@ const getPosts = async (req, res) => {
         // console.log(keywordSlug);
 
         keyword.replace("a","à");
-        filter = { slug: keyword };
+        filter.slug = keyword ;
     }
     const Posts = await PostModel.find(filter);
     if (!Posts) {
