@@ -33,18 +33,20 @@ const products = await ProductModel.find({$and: [{sellQuantity:{$gte:100}},{cate
 ## [Nâng cao] Cho từ khoá "khăn quang" (Người dùng nhập từ khăn có dấu còn từ quàng không có dấu), làm thế nào để ra được danh sách các sản phẩm có từ khoá "khăn quàng"
 ```
 const slugify = require('slugify');
-
+<!-- chỗ này em tính dùng slugify nhưng mà em thấy không ổn lắm nên dùng tạm replace rồi nghiên cứu slugify tiếp ạ =))) -->
 const getProducs = async (req, res, next) => {
-    const {keyword} = req.query;
-if(keyword){
-   
-}
-  res.send({ 
-    success: 1, 
-    data: {
-      data: posts,
-      total: totalPost
+   const { keyword } = req.query;
+    let filter = {};
+    if (keyword) {
+        const keywordSlug = keyword.replace("a", "à");
+        filter = { title: keywordSlug };
+        console.log(keywordSlug);
     }
-  });
+    console.log(filter);
+    const Products = await ProductModel.find(filter);
+    if (!Products) {
+        throw new HttpError("Something broke!");
+    }
+    res.send({ success: 1, data: Products });
 }
 ```
