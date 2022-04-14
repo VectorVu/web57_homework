@@ -1,8 +1,18 @@
 const PostModel = require("./post.model");
 const HttpError = require("../../common/httpError");
+const slugify = require('slugify');
 
 const getPosts = async (req, res) => {
-    const Posts = await PostModel.find();
+    const { keyword } = req.query;
+    let filter = {};
+    if (keyword) {
+        slugify.extend({ 'a': 'à' })
+        const keywordSlug = slugify(keyword);
+        console.log(keywordSlug);
+
+        filter = { slug: keyword };
+    }
+    const Posts = await PostModel.find(filter);
     if (!Posts) {
         throw new HttpError("Something broke!");
     }
