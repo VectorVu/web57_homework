@@ -8,7 +8,7 @@ const getPosts = async (req, res) => {
     if (keyword) {
        
         const keywordSlug = keyword.replace("a", "à");
-        filter={slug:keywordSlug};
+        filter={title:keywordSlug};
         console.log(keywordSlug);
     }
     console.log(filter);
