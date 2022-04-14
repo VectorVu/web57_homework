@@ -11,6 +11,7 @@ const getPosts = async (req, res) => {
         filter={slug:keywordSlug};
         console.log(keywordSlug);
     }
+    console.log(filter);
     const Posts = await PostModel.find(filter);
     if (!Posts) {
         throw new HttpError("Something broke!");
