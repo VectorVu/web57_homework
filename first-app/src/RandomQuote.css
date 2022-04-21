@@ -1,0 +1,90 @@
+.Quote {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background :cornflowerblue;
+    height: 100vh;
+}
+
+.Header {
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 3rem 0 5rem;
+}
+
+.Quote-box {
+    width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 34px;
+    color :cornflowerblue;
+}
+
+.Quote-content {
+    font-size: 24px;
+}
+
+.Quote-author {
+    margin-top: 8px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.Quote-action {
+    margin-top: 12px;
+}
+
+.Quote-new-btn {
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: cornflowerblue;
+}
+
+.Color-box, .Tag-box {
+    margin-top: 32px;
+    justify-content: center;
+}
+.Color-box {
+    background-color: #fff;
+}
+.Color-box, .Quote-new-btn {
+    display: inline-flex;
+    align-items: center;
+}
+.Color-item.active {
+    outline: 2px solid #ccc;
+    transform: scale(1.1);
+}
+
+.Color-item {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    background-color: #3498db;
+    border-radius: 3px;
+    margin: 6px;
+}
+.Tag-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Color-box, .Tag-box {
+    margin-top: 32px;
+    justify-content: center;
+}
+.Tag {
+    padding: 4px;
+    background-color: #fff;
+    margin: 4px;
+    cursor: pointer;
+}
