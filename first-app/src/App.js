@@ -1,8 +1,9 @@
 // import logo from './logo.svg';
 import './App.css';
-import Button from './components/Button';
-import './Dropdown.css';
-import Dropdown from './components/Dropdown';
+import Button from './components/Button/Button.js';
+import './components/Button/Button.css';
+import Dropdown from './components/Dropdown/Dropdown.js';
+import "./components/Dropdown/Dropdown.css";
 function App() {
   return (
     <div className="App">
