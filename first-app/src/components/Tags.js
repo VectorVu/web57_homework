@@ -22,31 +22,23 @@ const tags = [
     'technology',
     'wisdom'
 ];
-class TagBoxs extends React.Component {
-    constructor(props) {
-        super(props);
+function TagBoxs(props) {
+    const onHandleChangQuote = (selectedTag) => {
+        props.onChangeQuoteTags(selectedTag);
     }
-
-    onHandleChangQuote = async (selectedTag) => {
-        await this.props.onChangeQuoteTags(selectedTag);
-        this.props.fetchQuote();
-    }
-
-    render() {
-        const { activeTags } = this.props;
-
-        return (
-            <div className="Tag-box">
-                {tags.map((tag) => {
-                    const clsName = clsx({
-                        'Tag': true,
-                        'active': activeTags.includes(tag)
-                    }); return (
-                        <span key={tag} className={clsName} onClick={() => this.onHandleChangQuote(tag)}>{tag}</span>
-                    )
-                })}
-            </div>
-        )
-    }
+    const { activeTags } = props;
+    console.log(activeTags);
+    return (
+        <div className="Tag-box">
+            {tags.map((tag) => {
+                const clsName = clsx({
+                    'Tag': true,
+                    'active': activeTags.includes(tag)
+                }); return (
+                    <span key={tag} className={clsName} onClick={()=> onHandleChangQuote(tag)}>{tag}</span>
+                )
+            })}
+        </div>
+    )
 }
 export default TagBoxs;
